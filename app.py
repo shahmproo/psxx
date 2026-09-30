@@ -367,13 +367,14 @@ async def test_telegram_channel(req: Dict[str, str]):
     return {"success": True, "message": message}
 
 import gradio as gr
+import uvicorn
 
-# FastAPI ko Gradio ke sath block kar ke chalane ke liye:
+# Empty Gradio block taake Hugging Face environment satisfy ho jaye
 with gr.Blocks() as demo:
     gr.HTML("<meta http-equiv='refresh' content='0; url=/'>")
 
-# Mount existing FastAPI app
+# FastAPI par Gradio mount karein
 app = gr.mount_gradio_app(app, demo, path="/gradio")
 
 if __name__ == "__main__":
-    demo.queue().launch(server_name="0.0.0.0", server_port=7860, app=app)
+    uvicorn.run("app:app", host="0.0.0.0", port=7860, reload=False)
