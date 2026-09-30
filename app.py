@@ -368,10 +368,12 @@ async def test_telegram_channel(req: Dict[str, str]):
 
 import gradio as gr
 
-# Aapka pehle se bana hua FastAPI instance 'app'
-# Gradio ke sath mount karke 7860 port par expose karna:
-demo = gr.mount_gradio_app(app, gr.Blocks(), path="/gradio")
+# FastAPI ko Gradio ke sath block kar ke chalane ke liye:
+with gr.Blocks() as demo:
+    gr.HTML("<meta http-equiv='refresh' content='0; url=/'>")
+
+# Mount existing FastAPI app
+app = gr.mount_gradio_app(app, demo, path="/gradio")
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=7860)
+    demo.queue().launch(server_name="0.0.0.0", server_port=7860, app=app)
