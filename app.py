@@ -367,14 +367,23 @@ async def test_telegram_channel(req: Dict[str, str]):
     return {"success": True, "message": message}
 
 import gradio as gr
-import uvicorn
 
-# Empty Gradio block taake Hugging Face environment satisfy ho jaye
-with gr.Blocks() as demo:
-    gr.HTML("<meta http-equiv='refresh' content='0; url=/'>")
+# Gradio interface banayein jo app ko alive rakhega
+with gr.Blocks(title="PSX Terminal") as demo:
+    gr.HTML("""
+        <div style="text-align: center; padding: 20px; font-family: monospace;">
+            <h2>📈 PSX Real-Time Dashboard is Active!</h2>
+            <p>Direct web interface access karne ke liye neeche button par click karein:</p>
+            <a href="/" target="_top" style="display:inline-block; padding: 12px 24px; background: #2563eb; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">Open Full Dashboard 🚀</a>
+        </div>
+        <script>
+            // Auto redirect to main dashboard
+            window.location.href = '/';
+        </script>
+    """)
 
-# FastAPI par Gradio mount karein
+# FastAPI app ko mount karein
 app = gr.mount_gradio_app(app, demo, path="/gradio")
 
-if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=7860, reload=False)
+# Process ko zinda rakhne ke liye blocking launch
+demo.launch(server_name="0.0.0.0", server_port=7860)
