@@ -365,3 +365,13 @@ async def test_telegram_channel(req: Dict[str, str]):
     if not success:
         raise HTTPException(status_code=400, detail=message)
     return {"success": True, "message": message}
+
+import gradio as gr
+
+# Aapka pehle se bana hua FastAPI instance 'app'
+# Gradio ke sath mount karke 7860 port par expose karna:
+demo = gr.mount_gradio_app(app, gr.Blocks(), path="/gradio")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=7860)
