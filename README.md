@@ -1,4 +1,16 @@
+---
+title: PSX Live Dashboard
+emoji: 📈
+colorFrom: green
+colorTo: blue
+sdk: gradio
+sdk_version: 4.44.0
+app_file: app.py
+pinned: false
+---
+
 # PSX Real-Time Market Dashboard & Automated Alert Engine
+
 
 A high-performance, real-time Pakistan Stock Exchange (PSX) financial terminal and automated alert management system. Built with Python (FastAPI), WebSockets, SQLite (WAL mode), and a modern Bloomberg / TradingView inspired dark-mode web interface.
 
