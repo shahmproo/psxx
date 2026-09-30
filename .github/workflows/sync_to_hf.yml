@@ -17,4 +17,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://shahmproo:$HF_TOKEN@huggingface.co/spaces/shahmproo/psx-dashboard main
+          git push --force https://shahmeer1310:$HF_TOKEN@huggingface.co/spaces/shahmeer1310/psx-dashboard main
